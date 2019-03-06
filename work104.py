@@ -327,7 +327,7 @@ if __name__ == "__main__":
         print('\tPages:\t\t\t\t%s' % ('ALL'))
     else:
         print('\tPages:\t\t\t\t%s' % ('pages'))
-    print('\tSave separately:\t%s' % (save_separately))
+    print('\tSave separately:\t\t%s' % (save_separately))
     print('\tCache:\t\t\t\t%s' % (cache))
     print('\n')
 
@@ -402,3 +402,5 @@ if __name__ == "__main__":
     print('Processes all done.\n')
     print('Check the following directories.')
     print('./job104_resource/%s_%s'%(kyword, timenow))
+
+    time.sleep(100)
