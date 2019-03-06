@@ -1,0 +1,10 @@
+Data mining,資料分析,數據分析,資料探勘
+人臉辨識,臉孔辨識
+ETL,ELT
+AI,Artificial intelligence,人工智能,人工智慧
+R語言,R程式,R
+Machine learning,機器學習
+Deep learning,深度學習
+Chatbot,聊天機器人
+影像辨識,圖形辨識,圖片辨識
+NoSQL,No SQL
