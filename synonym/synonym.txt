@@ -1,10 +1,10 @@
-Data mining,¸ê®Æ¤ÀªR,¼Æ¾Ú¤ÀªR,¸ê®Æ±´°É
-¤HÁy¿ëÃÑ,Áy¤Õ¿ëÃÑ
+Data mining,è³‡æ–™åˆ†æ,æ•¸æ“šåˆ†æ,è³‡æ–™æ¢å‹˜
+äººè‡‰è¾¨è­˜,è‡‰å­”è¾¨è­˜
 ETL,ELT
-AI,Artificial intelligence,¤H¤u´¼¯à,¤H¤u´¼¼z
-R»y¨¥,Rµ{¦¡,R
-Machine learning,¾÷¾¹¾Ç²ß
-Deep learning,²`«×¾Ç²ß
-Chatbot,²á¤Ñ¾÷¾¹¤H
-¼v¹³¿ëÃÑ,¹Ï§Î¿ëÃÑ,¹Ï¤ù¿ëÃÑ
+AI,Artificial intelligence,äººå·¥æ™ºèƒ½,äººå·¥æ™ºæ…§
+Rèªè¨€,Rç¨‹å¼,R
+Machine learning,æ©Ÿå™¨å­¸ç¿’
+Deep learning,æ·±åº¦å­¸ç¿’
+Chatbot,èŠå¤©æ©Ÿå™¨äºº
+å½±åƒè¾¨è­˜,åœ–å½¢è¾¨è­˜,åœ–ç‰‡è¾¨è­˜
 NoSQL,No SQL

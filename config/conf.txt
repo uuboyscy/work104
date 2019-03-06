@@ -1,4 +1,4 @@
-kyword=¤j¼Æ¾Ú¤ÀªR
+kyword=å¤§æ•¸æ“šåˆ†æ
 pages=0
 save_separately=1
 cache=15

@@ -1,5 +1,5 @@
 Python
-R»y¨¥
+Rèªžè¨€
 MySQL
 MongoDB
 NoSQL

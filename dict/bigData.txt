@@ -1,12 +1,12 @@
-��Ƥ��R
-�ƾڤ��R
-��Ʊ���
-��ƭ��x
-���q��Ƥu�{�v
+資料分析
+數據分析
+資料探勘
+資料倉儲
+巨量資料工程師
 Big Data
 python
 SQL
-���p����Ʈw
+關聯式資料庫
 MySQL
 Oracle
 monogodb
@@ -18,23 +18,23 @@ aws
 gcp
 cloud service
 Artificial intelligence
-�H�u���z
+人工智慧
 Machine learning
-�����ǲ�
+機器學習
 Deep learning
-�`�׾ǲ�
+深度學習
 Chatbot
-��Ѿ����H
-�v������
-�ϧο���
-�Ϥ�����
-�y�տ���
-�H�y����
+聊天機器人
+影像辨識
+圖形辨識
+圖片辨識
+臉孔辨識
+人臉辨識
 Tensorflow
 Keras
 Python
-R�{��
-R�y��
+R程式
+R語言
 CNN
 RNN
 ETL
