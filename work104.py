@@ -57,6 +57,8 @@ def dealWithSynonym(long_str):
                     tmp_list.append(word_select.upper())
                 # print(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0])
                 continue
+            elif word_select.upper() == 'JAVA' or word_select.upper() == 'JAVASCRIPT':
+                continue
             elif word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == None:
                 # print(2,word_select)
                 continue
@@ -66,14 +68,36 @@ def dealWithSynonym(long_str):
     long_str = long_str.upper()
     for word_select in word_list:
         if (word_select.upper() in long_str) and (not word_select.upper() in tmp_list):
-            if word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
+            if word_select.upper() == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
                 # print(1, word_select)
                 long_str = long_str.replace(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0], '')
                 if re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == 'R':
                     tmp_list.append(word_select.upper())
                 # print(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0])
                 continue
-            elif word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == None:
+            elif word_select.upper() == 'JAVA':
+                continue
+            elif word_select.upper() == 'JAVASCRIPT':
+                long_str = long_str.replace('JAVASCRIPT', '')
+                tmp_list.append(word_select.upper())
+            elif word_select.upper() == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == None:
+                # print(2, word_select)
+                continue
+            else:
+                # print(3, word_select)
+                tmp_list.append(word_select.upper())
+    for word_select in word_list:
+        if (word_select.upper() in long_str) and (not word_select.upper() in tmp_list):
+            if word_select.upper() == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
+                # print(1, word_select)
+                long_str = long_str.replace(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0], '')
+                if re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == 'R':
+                    tmp_list.append(word_select.upper())
+                # print(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0])
+                continue
+            elif word_select.upper() == 'JAVA':
+                tmp_list.append(word_select.upper())
+            elif word_select.upper() == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == None:
                 # print(2, word_select)
                 continue
             else:
