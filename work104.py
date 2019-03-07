@@ -383,7 +383,8 @@ if __name__ == "__main__":
     work_path = r'./work_dir/%s' % (kyword)
     mr_path = r'%s/mr_%s' % (work_path, time.strftime("%Y-%m-%d_%H%M"))
 
-    cache_list = os.listdir(work_path)
+    # cache_list = os.listdir(work_path)
+    cache_list = [f for f in os.listdir(work_path) if f[0:2] != 'mr']
     threadList = list()
     for save_name, thr in enumerate(cache_list):
         threadList.append(threading.Thread(target=mrThread, args=(r'%s/%s' % (work_path, thr), mr_path, save_name)))
