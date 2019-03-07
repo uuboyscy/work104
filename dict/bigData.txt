@@ -1,4 +1,4 @@
-資料分析
+﻿資料分析
 數據分析
 資料探勘
 資料倉儲
@@ -16,7 +16,13 @@ Hbase
 spark
 aws
 gcp
+azure
 cloud service
+cloud server
+cloud
+雲服務
+雲端服務
+雲端運算
 Artificial intelligence
 人工智慧
 Machine learning

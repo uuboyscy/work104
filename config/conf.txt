@@ -1,4 +1,4 @@
-kyword=大數據分析
+﻿kyword=雲端服務
 pages=0
-save_separately=1
+save_separately=0
 cache=15
