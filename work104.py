@@ -6,6 +6,7 @@ import time
 import pandas as pd
 import re
 import threading
+import random
 import xlsxwriter
 
 # Load dictionary
@@ -49,15 +50,15 @@ def dealWithSynonym(long_str):
     long_str.replace(' ','')
     for word_select in word_list:
         if word_select in long_str:
-            if word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
+            if word_select.upper() == 'JAVA' or word_select.upper() == 'JAVASCRIPT':
+                continue
+            elif word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
                 # print(1,word_select)
                 long_str = long_str.replace(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0], '')
                 # print(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0])
                 if word_select in long_str:
                     tmp_list.append(word_select.upper())
                 # print(re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0])
-                continue
-            elif word_select.upper() == 'JAVA' or word_select.upper() == 'JAVASCRIPT':
                 continue
             elif word_select == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) == None:
                 # print(2,word_select)
@@ -86,6 +87,7 @@ def dealWithSynonym(long_str):
             else:
                 # print(3, word_select)
                 tmp_list.append(word_select.upper())
+    long_str = long_str.replace('JAVASCRIPT', '')
     for word_select in word_list:
         if (word_select.upper() in long_str) and (not word_select.upper() in tmp_list):
             if word_select.upper() == 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str)[0] != 'R' and re.compile('[a-zA-Z]*R[a-zA-Z]*').search(long_str) != None:
@@ -167,7 +169,7 @@ Keyword for a list of title and url
 [["Title1", "URL1", "Skill"], ["Title2", "URL2", "Skill"]]
 '''
 timenow = time.strftime("%Y-%m-%d_%H%M")
-def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15):
+def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15, from_page = 1):
 
     # Create a directory
     path = r'./job104_resource/%s_%s'%(keyword, timenow)
@@ -185,7 +187,7 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15):
         col += ohencoding_col
     df = pd.DataFrame(columns=col)
 
-    pages = 1
+    pages = from_page
     title_url_list = list()
     # skill data
     job_skill_data_sum = ''
@@ -237,7 +239,7 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15):
             df = df.append(pd.DataFrame([tmp_col], columns=col), ignore_index=True)
             print('==', end='')
             process_tag += 1
-            time.sleep(0.1)
+            time.sleep(random.randint(3,8)/10)
 
          # save skill data to a file every 15 pages
         if pages % cache == 0:
@@ -265,6 +267,11 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15):
         print('Done!')
         if pages % cache == 0 and save_separately != 0:
             print('File has saved to %s' % (path))
+
+        # Pause for 30 sec every 15 pages
+        if pages % 15 == 0:
+            print('----------\nTake a break for 30 sec.\n----------')
+            time.sleep(30)
         pages += 1
 
     with open(r'%s/%s' % (work_path, pages), 'w', encoding='utf-8') as skill:
@@ -275,9 +282,9 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15):
     return title_url_list
 
 # Count title amount
-def keywordForTitle_countTitle(keyword, max_page = 0):
+def keywordForTitle_countTitle(keyword, max_page = 0, from_page = 1):
 
-    pages = 1
+    pages = from_page
     count_title = 0
     while True:
         url = 'https://www.104.com.tw/jobs/search/?ro=0&keyword=%s&order=1&asc=0&page=%s&mode=s&jobsource=2018indexpoc'%(keyword, pages)
@@ -350,7 +357,7 @@ if __name__ == "__main__":
     if pages == 0:
         print('\tPages:\t\t\t\t%s' % ('ALL'))
     else:
-        print('\tPages:\t\t\t\t%s' % ('pages'))
+        print('\tPages:\t\t\t\t%s' % (pages))
     print('\tSave separately:\t\t%s' % (save_separately))
     print('\tCache:\t\t\t\t%s' % (cache))
     print('\n')
