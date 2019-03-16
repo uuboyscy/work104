@@ -26,8 +26,8 @@ Processes all done.，就代表資料抓取完畢囉。
 
 ### 輸出範例
 #### 資料夾畫面
-![image](https://github.com/uuboyscy/work104/blob/master/output-folder.png)
+![dataframe](https://github.com/uuboyscy/work104/blob/master/output-folder.png)
 #### Excel畫面
-![image](https://github.com/uuboyscy/work104/blob/master/output-dataframe.png)
+![excel](https://github.com/uuboyscy/work104/blob/master/output-dataframe.png)
 #### Word count
-![image](https://github.com/uuboyscy/work104/blob/master/output-wordcount.png)
+![word count](https://github.com/uuboyscy/work104/blob/master/output-wordcount.png)
