@@ -23,3 +23,11 @@ cache=設定爬蟲抓取幾頁搜尋結果就存成一份新的Excel。
 Processes all done.，就代表資料抓取完畢囉。
 
 6.	到job104_resource資料夾內查看爬取結果，map_reduce開頭的文字檔是技能個別小計數量；title_url開頭的Excel檔則是公司資訊、職缺名稱、聯絡資訊、所需技能(1=有，0=無)….等詳細資料。
+
+### 輸出範例
+#### 資料夾畫面
+![image](https://github.com/uuboyscy/work104/blob/master/output-folder.png)
+#### Excel畫面
+![image](https://github.com/uuboyscy/work104/blob/master/output-dataframe.png)
+#### Word count
+![image](https://github.com/uuboyscy/work104/blob/master/output-wordcount.png)
