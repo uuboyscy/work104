@@ -140,27 +140,25 @@ def getSkill(titleUrl):
         return tmp_list[0], tmp_list[1], tmp_list[2], tmp_list[3], job_skill_data
 
     soup = BeautifulSoup(res.text, 'html.parser')
-    contents = soup.select('section[class="info"]')
-    for each_content in contents:
-        for i, content_name in enumerate(tmp_list):
-            try:
-                p = each_content.select('div p')[0].text
-            except IndexError:
-                p = ''
-
-            try:
-                dl = each_content.select('div dl')[0].text
-            except IndexError:
-                dl = ''
-
-            if content_name == each_content.select('h2')[0].text:
-                tmp_list[i] = p + dl
-                if tmp_list[i] == '':
-                    tmp_list[i] == 'NA'
-                # if content_name == '工作內容' or content_name == '條件要求':
-                #     job_skill_data += p.replace('\n', '').replace('\t', '')
-                #     for j in each_content.select('div dl dd[class="cate"] span'):
-                #         job_skill_data += j.text.replace('\n', '').replace('\t', '')
+    ## modified 20200305
+    #contents = soup.select('div.content')
+    
+    # modified 20200305
+    # job_content
+    job_content = soup.select('div.content')[1].text
+    
+    # job_require
+    job_require= soup.select('div.content')[3].text +\
+                 soup.select('div.content')[4].text
+    
+    #job_welfare
+    job_welfare = soup.select('div.content')[2].text
+    
+    # job_contact
+    job_contact = soup.select('div.content')[5].table.text
+    
+    tmp_list = [job_content, job_require, job_welfare, job_contact]
+    ##
 
     return tmp_list[0], tmp_list[1], tmp_list[2], tmp_list[3], dealWithSynonym(re.sub(r'[-:_0-9、【】：)(，.&+]', '', (tmp_list[0].replace('\n', '').replace('\t', '') + tmp_list[1].replace('\n', '').replace('\t', ''))))
 
@@ -223,6 +221,10 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15, from
                 ohencoding_col_tmp = [0 for item in ohencoding_col]
             tmp_title = each_title.text
             tmp_url = each_title['href'].replace('//', 'https://')
+            ## modified 2020-03-05
+            tmp_url = tmp_url.replace('www', 'm')
+            ##
+            
             # job_skill_data is a list of all skills
             job_content, job_require, job_welfare, job_contact, job_skill_data = getSkill(tmp_url)
             # skill data
