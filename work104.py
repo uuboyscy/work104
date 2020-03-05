@@ -329,6 +329,9 @@ def mrThread(file_path, mr_path, save_name):
         f.write(tmp_str)
     # return tmp_str
 
+def main():
+    return 0
+
 if __name__ == "__main__":
     kyword = '大數據分析'
     pages = 0
