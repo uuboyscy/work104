@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Columns setting</title>
+    <style type="text/css">
+    	table {
+		  border-collapse: collapse;
+		  font-size: 8px;
+		}
+
+		table, th, td {
+		  border: 2px solid black;
+		}
+    	td {
+		  height: 20px;
+		  vertical-align: bottom;
+		}
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        function add_jietu(){
+            var add_jietu = document.getElementById('add_jietu');
+            var nodeFather = add_jietu.parentNode;
+            var node_clone = add_jietu.cloneNode();
+            content = add_jietu.innerHTML;
+            node_clone.removeAttribute('id');
+            node_clone.innerHTML = content;
+            nodeFather.appendChild(node_clone);
+        }
+    </script>
+    <div>
+    	<div>
+    		<h1>欄位設定(編輯中...)</h1>
+    	</div>
+    	<div>
+    		<h4>
+    			輸出之Excel檔欄位呈現如下
+    			<br>
+    			若要新增/刪減欄位，請於下方「編輯」您所需要的欄位
+    		</h4>
+    	</div>
+    	<div>
+    		<h5>
+    			<font color=red>
+	    			可修改處僅限於技能部分
+	    			<br>
+	    			{%for i in range(0, skill_columns_len)%}
+	    				<i>
+	    					{{ skill_columns[i] }}
+	    				</i>
+	    				<span class="emsp"></span>
+	    			{%endfor%}
+	    			<br>
+	    			其餘欄位皆為預設欄位，不可修改
+    			</font>
+    		</h5>
+    	</div>
+    	<br>
+    	<div>
+    		<table>
+    			<thead>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<th>{{ columns[i] }}</th>
+    					{%endfor%}
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata1[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata2[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata3[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    	<br>
+
+        <!--Check the columns-->
+        <div>
+            <form action="/col" method="POST">
+                <div class="well well-sm">
+                    
+                    {%for i in range(0, skill_columns_len)%}
+                        <div class="form-group">
+                            <label class="form-label">欄位:</label>
+                            <label class="form-label">{{ skill_columns[i] }}</label>
+                        </div>
+                    {%endfor%}
+
+                    <div>
+                        {%for i in range(0, skill_columns_len)%}
+                            <input type="hidden" name="skills[]" value="{{ skill_columns[i] }}">
+                        {%endfor%}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit">確認</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br>
+    	<div>
+    		<a href="/col">
+    			<button>取消</button>
+    		</a>
+    	</div>
+    </div>
+</body>
+</html>

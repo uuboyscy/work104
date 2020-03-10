@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Columns setting</title>
+    <style type="text/css">
+    	table {
+		  border-collapse: collapse;
+		  font-size: 8px;
+		}
+
+		table, th, td {
+		  border: 2px solid black;
+		}
+    	td {
+		  height: 20px;
+		  vertical-align: bottom;
+		}
+    </style>
+</head>
+<body>
+    <div>
+    	<div>
+    		<h1>欄位設定</h1>
+    	</div>
+    	<div>
+    		<h4>
+    			輸出之Excel檔欄位呈現如下
+    			<br>
+    			若要新增/刪減欄位，請點選下方「編輯」
+    		</h4>
+    	</div>
+    	<div>
+    		<h5>
+    			<font color=red>
+	    			可修改處僅限於技能部分
+	    			<br>
+	    			{%for i in range(0, skill_columns_len)%}
+	    				<i>
+	    					{{ skill_columns[i] }}
+	    				</i>
+	    				<span class="emsp"></span>
+	    			{%endfor%}
+	    			<br>
+	    			其餘欄位皆為預設欄位，不可修改
+    			</font>
+    		</h5>
+    	</div>
+    	<br>
+    	<div>
+    		<table>
+    			<thead>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<th>{{ columns[i] }}</th>
+    					{%endfor%}
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata1[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata2[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    				<tr>
+    					{%for i in range(0, columns_len)%}
+    						<td>{{ rdata3[i] }}</td>
+    					{%endfor%}
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    	<br>
+    	<div>
+    		<a href="/col_edit">
+    			編輯
+    		</a>
+    	</div>
+    </div>
+</body>
+</html>

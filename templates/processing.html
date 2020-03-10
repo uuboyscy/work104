@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!--meta http-equiv="refresh" content="1;"-->
+    <title>Processing</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+	{% if file_status != '0' %}
+		<div align="center" style="line-height:20px;">
+			<br>
+			<font size=2>
+				{{ file_status }}
+			</font>
+		</div>
+	{% else %}
+	<meta http-equiv="refresh" content="1;">
+		<div>
+			<h3>
+				<font color=green>
+					{%for i in range(0, process_line)%}
+						{{process_line_t}}
+					{%endfor%}
+				</font>
+				<font size=4>
+					{{ pct }}%
+				</font>
+			</h3>
+		</div>
+	{% endif %}
+</body>
+</html>

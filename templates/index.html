@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Import data</title>
+    <!--link href="/static/css/style.css" rel="stylesheet" type="text/css" /-->
+    <!--link href="/css" rel="stylesheet" type="text/css" /-->
+    <style type="text/css">
+        .drop + input{
+         display: none;
+        }
+
+        .drop + input + div{
+          display:none;
+        }
+
+        .drop + input:checked + div{
+          display:block;
+        }
+
+        .function-describe{
+            color: red;
+        }
+
+        .function-describe-button{
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>歡迎使用104爬蟲</h1>
+        </div>
+        <div>
+            <form action="/start_search" target="_blank">
+                
+                <div>
+                    <label>關鍵字詞：</label>
+                </div>
+                <div>
+                    <input type="textbox" name="keyword">
+                    <font size="1">
+                        <label class="drop function-describe-button" for="_1">點擊查看說明</label>
+                        <input type="checkbox" id="_1">
+                        <div class="function-describe">
+                            請輸入欲搜尋的關鍵字
+                            <br>
+                            ex.資料工程師
+                        </div>
+                    </font>
+                </div>
+                
+                <br>
+                
+                <div>
+                    <label>爬取頁數：</label>
+                </div>
+                <div>
+                    <input type="textbox" name="page">
+                    <font size="1">
+                        <label class="drop function-describe-button" for="_2">點擊查看說明</label>
+                        <input type="checkbox" id="_2">
+                        <div class="function-describe">
+                            請輸入大於或等於0的數字，
+                            <br>
+                            查詢結果可能會有數十頁甚至數百頁，
+                            <br>
+                            輸入0，將所有查詢結果儲存；
+                            <br>
+                            輸入0以外的數字則只爬取該數量。
+                            <br>
+                            可以先輸入較小頁數來測試爬取結果，例如3。
+                        </div>
+                    </font>
+                </div>
+                
+                <br>
+                
+                <div>
+                    <label>清空暫存：</label>
+                </div>
+                <div>
+                    <input type="textbox" name="cache">
+                    <font size="1">
+                        <label class="drop function-describe-button" for="_3">點擊查看說明</label>
+                        <input type="checkbox" id="_3">
+                        <div class="function-describe">
+                            請輸入大於或等於1的數字，
+                            <br>
+                            此功能用來批量儲存爬取結果，
+                            <br>
+                            例如輸入15，則每爬取15頁會自動存成一份Excel，
+                            <br>
+                            此數字建議設定大於10。
+                            <br>
+                        </div>
+                    </font>
+                </div>
+                
+                <br>
+                
+                <div>
+                    <label>分開儲存：</label>
+                </div>
+                <div>
+                    <label>是</label>
+                    <input type="checkbox" name="sep" value="1">
+                    <font size="1">
+                        <label class="drop function-describe-button" for="_4">點擊查看說明</label>
+                        <input type="checkbox" id="_4">
+                        <div class="function-describe">
+                            需要分開儲存請勾選「是」，
+                            <br>
+                            此功能若開啟，將會啟動「清空暫存」功能，
+                            <br>
+                            若不勾選，則會在所有內容爬取完成後才一次存成一份Excel。
+                            <br>
+                            因爬取過程會將資料暫時存放在記憶體，
+                            <br>
+                            此功能若開啟，則會每爬取一定頁數後先行儲存並清空記憶體，
+                            <br>
+                            可視需求開啟此功能。
+                        </div>
+                    </font>
+                </div>
+                
+                <br>
+                
+                <div>
+                    <button type="submit">Start</button>
+                </div>
+
+            </form>
+        </div>
+        
+        <br>
+        <br>
+        
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <a href="{{ my_dict }}" target="_blank">
+                            查看詞典
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ synonym_dict }}" target="_blank">
+                            查看同義字
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ columns }}" target="_blank">
+                            查看欄位
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</body>
+</html>

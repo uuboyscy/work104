@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Data confirm</title>
+</head>
+<body>
+    <div>
+    	<div>
+    		<h1>請確認您輸入的資訊</h1>
+    	</div>
+    	<div>
+    		<table>
+    			<tbody>
+    				<tr>
+    					<td>關鍵字詞：</td>
+    					<td>{{ kyword }}</td>
+    				</tr>
+    				<tr>
+    					<td>爬取頁數：</td>
+    					<td>{{ pages }}</td>
+    				</tr>
+    				<tr>
+    					<td>清空暫存：</td>
+    					<td>{{ cache }}</td>
+    				</tr>
+    				<tr>
+    					<td>分開儲存：</td>
+    					<td>{{ save_separately_str }}</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    	<div>
+    		<form action="/start_search" method="POST">
+    			<div>
+    				<input type="hidden" name="keyword" value="{{ kyword }}">
+    				<input type="hidden" name="page" value="{{ pages }}">
+    				<input type="hidden" name="cache" value="{{ cache }}">
+    				<input type="hidden" name="sep" value="{{ save_separately }}">
+    			</div>
+    			<div>
+    				<button type="submit">確認送出</button>	
+    			</div>
+    		</form>
+    	</div>
+    </div>
+</body>
+</html>

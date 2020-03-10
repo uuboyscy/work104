@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Processing</title>
+    <style type="text/css">
+        .function-describe-button{
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    	<div>
+    		<h1>爬蟲程式執行中，請勿關閉視窗</h1>
+    	</div>
+    	<div class="function-describe-button">
+    		<table>
+    			<tbody>
+    				<tr>
+    					<td>關鍵字詞：</td>
+    					<td>{{ kyword }}</td>
+    				</tr>
+    				<tr>
+    					<td>爬取頁數：</td>
+    					<td>{{ pages }}</td>
+    				</tr>
+    				<tr>
+    					<td>清空暫存：</td>
+    					<td>{{ cache }}</td>
+    				</tr>
+    				<tr>
+    					<td>分開儲存：</td>
+    					<td>{{ save_separately_str }}</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    	<div>
+    		<h4>
+    			請待最下方紅燈轉為綠燈方可關閉視窗
+    			<br>
+    			結束時會顯示檔案存放位置
+    		</h4>
+    	</div>
+    	<br>
+    	<br>
+    	<div>
+    		<iframe src="/processing" style="border:2px solid black;" height="60" width="382"></iframe>
+    	</div>
+    	<div>
+    		<iframe src="/execution" height="22" width="92" style="background-color: red"></iframe>
+    	</div>
+    </div>
+</body>
+</html>

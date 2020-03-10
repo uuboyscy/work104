@@ -1,0 +1,22 @@
+.flip{margin:0px;padding:5px;text-align:center;background:#E09697;cursor:pointer;font-family:'Arial';}
+.panel{margin:0px;padding:5px;text-align:center;background:#e5eecc;border:solid 1px #c3c3c3;display:none;font-family:'Arial';}
+
+.drop {
+  cursor: pointer;
+  display: block;
+  background: #090;
+}
+
+.drop + input{
+ display: none; /* hide the checkboxes */
+}
+
+.drop + input + div{
+  display:none;
+}
+
+.drop + input:checked + div{
+  display:block;
+}
+
+div{color: red;}

@@ -1,0 +1,28 @@
+.flip{margin:0px;padding:5px;text-align:center;background:#E09697;cursor:pointer;font-family:'Arial';}
+.panel{margin:0px;padding:5px;text-align:center;background:#e5eecc;border:solid 1px #c3c3c3;display:none;font-family:'Arial';}
+
+.drop {
+  cursor: pointer;
+  display: block;
+  background: #090;
+}
+
+.drop + input{
+ display: none;
+}
+
+.drop + input + div{
+  display:none;
+}
+
+.drop + input:checked + div{
+  display:block;
+}
+
+.function-describe{
+            color: red;
+        }
+
+.function-describe-button{
+    background-color: #ffe6e6;
+}
