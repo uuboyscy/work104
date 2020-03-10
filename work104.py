@@ -123,6 +123,13 @@ def dealWithSynonym(long_str):
     return tmp_str
 
 def getSkill(titleUrl):
+    ## modified 20200306
+    tmp_title_count = 0
+    with open(r'./work_dir/.title_count.txt', 'r') as f:
+        tmp_title_count = int(f.read().split('\n')[0])
+    with open(r'./work_dir/.title_count.txt', 'w') as f:
+        f.write(str(tmp_title_count + 1))
+    ##
     job_content = '工作內容'
     job_require = '條件要求'
     job_welfare = '公司福利'
@@ -145,17 +152,29 @@ def getSkill(titleUrl):
     
     # modified 20200305
     # job_content
-    job_content = soup.select('div.content')[1].text
+    try:
+        job_content = soup.select('div.content')[1].text
+    except:
+        job_content = '工作內容'
     
     # job_require
-    job_require= soup.select('div.content')[3].text +\
-                 soup.select('div.content')[4].text
+    try:
+        job_require= soup.select('div.content')[3].text +\
+                     soup.select('div.content')[4].text
+    except:
+        job_require = '條件要求'
     
     #job_welfare
-    job_welfare = soup.select('div.content')[2].text
+    try:
+        job_welfare = soup.select('div.content')[2].text
+    except:
+        job_welfare = '公司福利'
     
     # job_contact
-    job_contact = soup.select('div.content')[5].table.text
+    try:
+        job_contact = soup.select('div.content')[5].table.text
+    except:
+        job_contact = '聯絡方式'
     
     tmp_list = [job_content, job_require, job_welfare, job_contact]
     ##
@@ -330,9 +349,6 @@ def mrThread(file_path, mr_path, save_name):
     # return tmp_str
 
 def main():
-    return 0
-
-if __name__ == "__main__":
     kyword = '大數據分析'
     pages = 0
     save_separately = 1
@@ -375,6 +391,12 @@ if __name__ == "__main__":
     title_amount = keywordForTitle_countTitle(kyword, pages)
     print('(%s)'%(title_amount))
     print('\n')
+    ## modified 20200306
+    with open(r'./work_dir/.title_amount.txt', 'w') as f:
+        f.write(str(title_amount))
+    with open(r'./work_dir/.title_count.txt', 'w') as f:
+        f.write('0')
+    ##
     time.sleep(2)
 
     print('[Loading data...]')
@@ -439,5 +461,27 @@ if __name__ == "__main__":
     print('Processes all done.\n')
     print('Check the following directories.')
     print('./job104_resource/%s_%s'%(kyword, timenow))
+    with open(r'./work_dir/.file_status.txt', 'w') as f:
+        f.write('job104_resource/%s_%s'%(kyword, timenow))
 
-    time.sleep(100)
+    time.sleep(2)
+    
+    outStr = """
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body bgcolor="green">
+    <div class="w3-animate-opacity" align="center">
+    ALL DONE!
+    </div>
+    </body>
+    </html>
+    """
+    
+    return outStr
+    
+
+if __name__ == "__main__":
+    main()
+    
