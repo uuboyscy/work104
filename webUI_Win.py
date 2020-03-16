@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from flask import render_template
 from flask import url_for, redirect
 import requests
-import work104
+import work104_Win
 import webbrowser
 import random
 import os
@@ -142,7 +142,7 @@ def processing():
 
 @app.route('/execution')
 def execution():
-    return work104.main()
+    return work104_Win.main()
 
 @app.route('/mydict', methods=['GET', 'POST'])
 def mydict():
