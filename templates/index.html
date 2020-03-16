@@ -29,6 +29,18 @@
     </style>
 </head>
 <body>
+    <script type="text/javascript">
+        function ValidateValue(textbox) {
+            var IllegalString = "[`~!#$^&*()=|{}':;',\\[\\].<>/?~！#￥……&*（）——|{}【】‘；：”“'。，、？]‘'";
+            var textboxvalue = textbox.value;
+            var index = textboxvalue.length - 1;
+            var s = textbox.value.charAt(index);
+            if (IllegalString.indexOf(s) >= 0) {
+            s = textboxvalue.substring(0, index);
+            textbox.value = s;
+            }
+        }
+    </script>
     <div>
         <div>
             <h1>歡迎使用104爬蟲</h1>
@@ -40,7 +52,7 @@
                     <label>關鍵字詞：</label>
                 </div>
                 <div>
-                    <input type="textbox" name="keyword">
+                    <input type="textbox" name="keyword" required="required" onkeyup="ValidateValue(this)">
                     <font size="1">
                         <label class="drop function-describe-button" for="_1">點擊查看說明</label>
                         <input type="checkbox" id="_1">
@@ -58,7 +70,7 @@
                     <label>爬取頁數：</label>
                 </div>
                 <div>
-                    <input type="textbox" name="page">
+                    <input type="textbox" name="page" value="0" required="required" onkeyup="ValidateValue(this)">
                     <font size="1">
                         <label class="drop function-describe-button" for="_2">點擊查看說明</label>
                         <input type="checkbox" id="_2">
@@ -82,7 +94,7 @@
                     <label>清空暫存：</label>
                 </div>
                 <div>
-                    <input type="textbox" name="cache">
+                    <input type="textbox" name="cache" value="15" required="required" onkeyup="ValidateValue(this)">
                     <font size="1">
                         <label class="drop function-describe-button" for="_3">點擊查看說明</label>
                         <input type="checkbox" id="_3">
@@ -148,7 +160,7 @@
                     </td>
                     <td>
                         <a href="{{ synonym_dict }}" target="_blank">
-                            查看同義字
+                            查看同義詞
                         </a>
                     </td>
                     <td>

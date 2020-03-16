@@ -3,11 +3,12 @@
 
 from flask import Flask, request, jsonify
 from flask import render_template
-from flask import url_for
+from flask import url_for, redirect
 import requests
 import work104
 import webbrowser
 import random
+import os
 
 app = Flask(__name__, static_url_path='/static', static_folder='./static')
 # url_for('static', filename='css/mystyle.css')
@@ -25,6 +26,31 @@ def tmp_dev():
 @app.route('/css')
 def css():
     return render_template('mystyle.html')
+
+# Request /upload/<foldername>?u=  -> <foldername> is the folder where the deleting file locate
+# u='' is the page to redirect
+# use post method to upload file -> file=''
+@app.route('/upload/<foldername>', methods=['POST'])
+def upload(foldername):
+    redirect_url = str(request.args.get('u'))
+    file = request.files.get('file')
+    filename = file.filename
+    file.save('./%s/%s'%(foldername, filename))
+    return redirect(url_for(redirect_url))
+
+@app.route('/delete_file/<foldername>', methods=['POST'])
+def delete_file(foldername):
+    redirect_url = str(request.args.get('u'))
+    file = request.form.get('file')
+    filename = file
+    print(filename == '')
+    print('./%s/%s'%(foldername, filename))
+    if filename != '':
+        try:
+            os.remove('./%s/%s'%(foldername, filename))
+        except:
+            return redirect(url_for(redirect_url))
+    return redirect(url_for(redirect_url))
 
 # Input "Keyword", "page", "save_sep" and "cache" 
 @app.route('/index.html')
@@ -118,13 +144,82 @@ def processing():
 def execution():
     return work104.main()
 
-@app.route('/mydict')
+@app.route('/mydict', methods=['GET', 'POST'])
 def mydict():
-    return render_template('mydict.html')
+    path = './dict'
 
-@app.route('/syndict')
+    if request.method == 'GET':
+        dict_file_list = os.listdir(path)
+        dict_content_list = list()
+        dict_amount = len(dict_file_list)
+        for f in dict_file_list:
+            with open('%s/%s' % (path, f), 'r') as d:
+                tmp_content_list = [c for c in d.read().split('\n') if c != '']
+                dict_content_list.append(tmp_content_list)
+        dict_file_list = [f.split('.')[0] for f in dict_file_list]
+        return render_template('mydict.html',
+                               dict_amount=dict_amount,
+                               dict_file_list=dict_file_list,
+                               dict_content_list=dict_content_list,
+                               request_method='GET'
+                               )
+    elif request.method == 'POST':
+        # Modify dictionary
+        m_dict_file_list = request.form.getlist('_dict_file_list')
+        for filename in m_dict_file_list:
+            with open('%s/%s.txt'%(path, filename), 'w') as f:
+                tmp_str_list = [c for c in request.form.getlist(filename) if c != '']
+                tmp_str = ''
+                for n, c in enumerate(tmp_str_list):
+                    tmp_str += c
+                    tmp_str += '\n' if n < len(tmp_str_list)-1 else ''
+                f.write(tmp_str)
+
+        dict_file_list = os.listdir(path)
+        dict_content_list = list()
+        dict_amount = len(dict_file_list)
+        for f in dict_file_list:
+            with open('%s/%s' % (path, f), 'r') as d:
+                tmp_content_list = [c for c in d.read().split('\n') if c != '']
+                dict_content_list.append(tmp_content_list)
+        dict_file_list = [f.split('.')[0] for f in dict_file_list]
+        return render_template('mydict.html',
+                               dict_amount=dict_amount,
+                               dict_file_list=dict_file_list,
+                               dict_content_list=dict_content_list,
+                               request_method='POST'
+                               )
+
+@app.route('/syndict', methods=['GET', 'POST'])
 def syndict():
-    return render_template('syndict.html')
+    path = './synonym/synonym.txt'
+    request_method = request.method
+    dict_list = ''
+    dict_list_amount = 0
+    if request_method == 'GET':
+        with open(path, 'r') as f:
+            dict_list = [w for w in f.read().split('\n') if w != '']
+        dict_list_amount = len(dict_list)
+        return render_template('syndict.html',
+                               request_method=request_method,
+                               dict_list=dict_list,
+                               dict_list_amount=dict_list_amount
+                               )
+    elif request_method == 'POST':
+        dict_list = [w for w in request.form.getlist('syndict[]') if w != '']
+        dict_str = '\n'.join(dict_list)
+        with open(path, 'w') as f:
+            f.write(dict_str)
+        print(dict_str)
+        with open(path, 'r') as f:
+            dict_list = [w for w in f.read().split('\n') if w != '']
+        dict_list_amount = len(dict_list)
+        return render_template('syndict.html',
+                               request_method=request_method,
+                               dict_list=dict_list,
+                               dict_list_amount=dict_list_amount
+                               )
+
 
 # show how the dataframe looks like
 @app.route('/col', methods=['GET', 'POST'])
@@ -247,5 +342,5 @@ def col_confirm():
                            )
 
 if __name__ == '__main__':
-    webbrowser.open('http://localhost:5001/test')
+    webbrowser.open('http://localhost:5001/test', new=0)
     app.run(debug=True, host='0.0.0.0', port=5001)

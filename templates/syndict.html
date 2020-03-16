@@ -4,8 +4,103 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Synonym setting</title>
+    <style type="text/css">
+        .drop + input{
+         display: none;
+        }
+
+        .drop + input + div{
+          display:none;
+        }
+
+        .drop + input:checked + div{
+          display:block;
+        }
+
+        .function-describe{
+            color: red;
+        }
+
+        .function-describe-button{
+            background-color: #ffe6e6;
+        }
+    </style>
 </head>
 <body>
-    UNDER CONSTRUCTION
+	<script type="text/javascript">
+        function add_col(){
+            var add_col = document.getElementById('add_col');
+            var nodeFather = add_col.parentNode;
+            var node_clone = add_col.cloneNode();
+            content = add_col.innerHTML;
+            node_clone.removeAttribute('id');
+            node_clone.innerHTML = content;
+            nodeFather.appendChild(node_clone);
+        }
+    </script>
+	{%if request_method == 'POST'%}
+    <div>
+		<font color=red>-- 同義詞已更新 --</font>
+    </div>
+    {%endif%}
+
+    <div>
+    	<div>
+    		<h1>同義詞詞典</h1>
+    		<div>
+    			<font color=red>
+    				以下為現存同義詞詞典檔，可自行於下方表單填入欲新增之同義詞，
+    				<br>
+    				同義詞格式：相同意思的詞請用「半形逗號」隔開
+    				<br>
+    				ex. AI,Artificial intelligence,人工智能,人工智慧
+    				<br>
+    				已存在之同義詞也可自行修改新增
+    			</font>
+    		</div>
+    	</div>
+
+    	<br>
+    	<br>
+    	<!--Show synonym dictionary-->
+    	<div>
+    		<form action='/syndict' method="POST">
+    			<!--Original synonym dictionary-->
+    			<div>
+    				<div>
+    					<label class="form-label">原有同義詞:</label>
+    				</div>
+    				{% for i in range(0,dict_list_amount) %}
+    					<div>
+    						<input type="textbox" name="syndict[]" value="{{ dict_list[i] }}" style="width:1000px">
+    					</div>
+    				{% endfor %}
+    			</div>
+    			<!--Let user add dictionary-->
+    			<div class="well well-sm">
+                    <div>
+                        <div class="form-group" id="add_col">
+                            <label class="form-label">新增同義詞:</label>
+                            <input type="textbox" name="syndict[]" class="form-input" style="width:910px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="form-tip" onclick="add_col()" style="border-width:0px 0px 1px 0px;border-style:dashed;border-color:#FFAC55;padding:5px;">
+                            <font color="#428bca" >
+                                點選新增同義詞
+                            </font>
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div>
+                	<button type="submit">確認新增同義詞</button>
+                </div>
+    		</form>
+    	</div>
+
+    	<br>
+    	<br>
+    </div>
 </body>
 </html>

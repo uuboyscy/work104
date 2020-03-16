@@ -4,8 +4,161 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Dictionary setting</title>
+    <style type="text/css">
+        .drop + input{
+         display: none;
+        }
+
+        .drop + input + div{
+          display:none;
+        }
+
+        .drop + input:checked + div{
+          display:block;
+        }
+
+        .function-describe{
+            color: red;
+        }
+
+        .function-describe-button{
+            background-color: #ffe6e6;
+        }
+    </style>
 </head>
 <body>
-    UNDER CONSTRUCTION
+    {%if request_method == 'POST'%}
+    <div>
+		<font color=red>-- 字典已更新 --</font>
+    </div>
+    {%endif%}
+    <div>
+    	<div>
+    		<h1>自定義字典</h1>
+    		<div>
+    			<font color=red>
+    				以下為現存字典檔，可自行於下方表單填入欲新增字典，
+    				<br>
+    				最下方也可自行上傳字典檔
+    				<br>
+    				若要刪除字典檔，請於字典檔名旁的表單填入字典名稱再按「確認刪除」
+    			</font>
+    		</div>
+    	</div>
+
+    	<!--Show dictionary in each dictionary file-->
+    	<div>
+    		<form action="/mydict" method="POST">
+		    	{%for i in range(0,dict_amount)%}
+		    		<script type="text/javascript">
+				        function add_col_{{ dict_file_list[i] }}(){
+				            var add_col_{{ dict_file_list[i] }} = document.getElementById('add_col_{{ dict_file_list[i] }}');
+				            var nodeFather = add_col_{{ dict_file_list[i] }}.parentNode;
+				            var node_clone = add_col_{{ dict_file_list[i] }}.cloneNode();
+				            content = add_col_{{ dict_file_list[i] }}.innerHTML;
+				            node_clone.removeAttribute('id');
+				            node_clone.innerHTML = content;
+				            nodeFather.appendChild(node_clone);
+				        }
+				    </script>
+		    		<div>
+		    			<table>
+		    				<tr>
+		    					<td>
+					    			<h3>
+					    				<u>
+				    						{{ dict_file_list[i] }}.txt
+					    				</u>
+					    			</h3>
+				    			</td>
+				    			<td>
+				    				<!--Delete file-->
+			    					<form action="/delete_file/dict?u=mydict" method="POST">
+			    						<input type="textbox" name="file">
+			    						<button type="submit">確認刪除</button>
+			    					</form>
+				    			</td>
+				    		</tr>
+		    			</table>
+		    			<!--Click to show original dictionary-->
+		    			<div>
+		    				<label class="drop function-describe-button" for="_{{ i }}">
+		    					點擊查看字典內容
+		    				</label>
+		    				<input type="checkbox" id="_{{ i }}">
+		    				<div class="function-describe">
+		    					<div class="form-group">
+		    						<label class="form-label">
+		    							原有字典:
+		    						</label>
+		    					</div>
+		    					<!--Show dictionary-->
+		    					<div class="form-group">
+		                            {%for c in range(0,dict_content_list[i]|length)%}
+				                            <input type="textbox" name="{{ dict_file_list[i] }}" class="form-input" value="{{ dict_content_list[i][c] }}">
+				                            {%if (c+1)%6 == 0%}
+				                            <br>
+				                            {%endif%}
+				                    {%endfor%}
+			                    </div>
+
+                        	</div>
+		    			</div>
+		    			<!--Let user add dictionary-->
+		    			<div class="well well-sm">
+		                    <div>
+		                        <div class="form-group" id="add_col_{{ dict_file_list[i] }}">
+		                            <label class="form-label">新增字典:</label>
+		                            <input type="textbox" name="{{ dict_file_list[i] }}" class="form-input">
+		                        </div>
+		                    </div>
+		                    <div class="form-group">
+		                        <span class="form-tip" onclick="add_col_{{ dict_file_list[i] }}()" style="border-width:0px 0px 1px 0px;border-style:dashed;border-color:#FFAC55;padding:5px;">
+		                            <font color="#428bca" >
+		                                點選新增欄位
+		                            </font>
+		                        </span>
+		                    </div>
+		                </div>
+		    		</div>
+		    		<br>
+		    		<hr size="8px" align="center" width="100%">
+		    		<br>
+		    	{%endfor%}
+
+		    	{%for i in range(0,dict_amount)%}
+		    		<input type="hidden" name="_dict_file_list", value="{{ dict_file_list[i] }}">
+		    	{%endfor%}
+		    	<button type="submit">確認新增字典</button>
+	    	</form>
+    	</div>
+    	<br>
+
+    	<!--Let user upload dictionary-->
+    	<br>
+    	<div>
+    		<h3>
+    			上傳字典檔
+    		</h3>
+    		<div>
+    			<font color=red>
+    				字典格式必須為txt檔
+    				<br>
+    				每列只能設定一個詞
+    				<br>
+    				詳細設置請參考下圖範例
+    			</font>
+    			<div>
+    				<img src="/static/images/dict_example.png">
+    			</div>
+    		</div>
+    		<form action="/upload/dict?u=mydict" method="POST" enctype="multipart/form-data">
+    			<input type="file" name="file">
+    			<button type="submit">確認上傳</button>
+    		</form>
+    	</div>
+    	<br>
+    	<br>
+    </div>
 </body>
 </html>
