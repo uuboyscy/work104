@@ -14,7 +14,7 @@ path = './dict'
 dictionary_list = os.listdir(path)
 word_list = list()
 for f in dictionary_list:
-    with open(r'%s/%s'%(path, f), 'r') as d:
+    with open(r'%s/%s'%(path, f), 'r', encoding='utf-8') as d:
         word_list += d.read().split('\n')
 
 # Header
@@ -37,7 +37,7 @@ if not os.path.isdir(work_path):
 # synonym dictionary
 synonym_dict = {}
 synonym_path = r'./synonym/synonym.txt'
-with open(synonym_path, 'r') as syn:
+with open(synonym_path, 'r', encoding='utf-8') as syn:
     syn_str = syn.read().split('\n')
 for each_row in syn_str:
     synonym_dict[each_row.split(',')[0]] = [item for item in each_row.split(',')]
@@ -125,9 +125,9 @@ def dealWithSynonym(long_str):
 def getSkill(titleUrl):
     ## modified 20200306
     tmp_title_count = 0
-    with open(r'./work_dir/.title_count.txt', 'r') as f:
+    with open(r'./work_dir/.title_count.txt', 'r', encoding='utf-8') as f:
         tmp_title_count = int(f.read().split('\n')[0])
-    with open(r'./work_dir/.title_count.txt', 'w') as f:
+    with open(r'./work_dir/.title_count.txt', 'w', encoding='utf-8') as f:
         f.write(str(tmp_title_count + 1))
     ##
     job_content = '工作內容'
@@ -197,7 +197,7 @@ def keywordForTitle(keyword, max_page = 0, save_separately = 0, cache = 15, from
         os.mkdir(work_path)
 
     col_path = r'./config/col.txt'
-    ohencoding_col = open(col_path, 'r').read().lower().split('\n')
+    ohencoding_col = open(col_path, 'r', encoding='utf-8').read().lower().split('\n')
 
     col = ['Job_company', 'Job Openings','Job_content', 'Job_require', 'Job_welfare', 'Job_contact', 'URL']
     if len(ohencoding_col) > 0:
@@ -354,7 +354,7 @@ def main():
     save_separately = 1
     cache = 15
     ori_par = [kyword, pages, save_separately, cache]
-    with open(r'./config/conf.txt', 'r') as con:
+    with open(r'./config/conf.txt', 'r', encoding='utf-8') as con:
         par = con.read().split('\n')
     # print(par)
     for n, p in enumerate(par):
